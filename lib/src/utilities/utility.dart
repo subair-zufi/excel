@@ -28,7 +28,7 @@ int lettersToNumeric(String letters) {
     } else if (97 <= c && c <= 122) {
       n += c - 97;
     }
-    sum += n * mul;
+    sum += n * mul as int;
     mul = mul * 26;
   }
   return sum;
@@ -43,14 +43,14 @@ Iterable<XmlElement> _findCells(XmlElement row) {
 }
 
 int _getCellNumber(XmlElement cell) {
-  return _cellCoordsFromCellId(cell.getAttribute('r'))[1];
+  return _cellCoordsFromCellId(cell.getAttribute('r')!)[1];
 }
 
 int _getRowNumber(XmlElement row) {
-  return int.parse(row.getAttribute('r'));
+  return int.parse(row.getAttribute('r')!);
 }
 
-int _checkPosition(List<CellStyle> list, CellStyle cellStyle) {
+int _checkPosition(List<CellStyle?> list, CellStyle? cellStyle) {
   return list.indexOf(cellStyle);
 }
 
@@ -124,7 +124,7 @@ List<int> _cellCoordsFromCellId(String cellId) {
 ///Throw error at situation where further processing is not possible
 ///It is also called when important parts of excel files are missing as corrupted excel file is used
 ///
-_damagedExcel({String text}) {
+_damagedExcel({String? text}) {
   String t = '\nDamaged Excel file:';
   if (text != null) {
     t += ' $text';
@@ -143,53 +143,53 @@ String getSpanCellId(int startColumn, int startRow, int endColumn, int endRow) {
 ///returns updated SpanObject location as there might be cross-sectional interaction between the two spanning objects.
 ///
 List _isLocationChangeRequired(
-    int startColumn, int startRow, int endColumn, int endRow, _Span spanObj) {
+    int? startColumn, int startRow, int? endColumn, int? endRow, _Span spanObj) {
   bool changeValue = (
           // Overlapping checker
-          startRow <= spanObj.rowSpanStart &&
-              startColumn <= spanObj.columnSpanStart &&
-              endRow >= spanObj.rowSpanEnd &&
-              endColumn >= spanObj.columnSpanEnd)
+          startRow <= spanObj.rowSpanStart! &&
+              startColumn! <= spanObj.columnSpanStart! &&
+              endRow! >= spanObj.rowSpanEnd! &&
+              endColumn! >= spanObj.columnSpanEnd!)
       // first check starts here
       ||
       ( // outwards checking
-          ((startColumn < spanObj.columnSpanStart &&
-                      endColumn >= spanObj.columnSpanStart) ||
-                  (startColumn <= spanObj.columnSpanEnd &&
-                      endColumn > spanObj.columnSpanEnd))
+          ((startColumn! < spanObj.columnSpanStart! &&
+                      endColumn! >= spanObj.columnSpanStart!) ||
+                  (startColumn <= spanObj.columnSpanEnd! &&
+                      endColumn! > spanObj.columnSpanEnd!))
               // inwards checking
               &&
-              ((startRow >= spanObj.rowSpanStart &&
-                      startRow <= spanObj.rowSpanEnd) ||
-                  (endRow >= spanObj.rowSpanStart &&
-                      endRow <= spanObj.rowSpanEnd)))
+              ((startRow >= spanObj.rowSpanStart! &&
+                      startRow <= spanObj.rowSpanEnd!) ||
+                  (endRow! >= spanObj.rowSpanStart! &&
+                      endRow <= spanObj.rowSpanEnd!)))
 
       // second check starts here
       ||
       (
           // outwards checking
-          ((startRow < spanObj.rowSpanStart &&
-                      endRow >= spanObj.rowSpanStart) ||
-                  (startRow <= spanObj.rowSpanEnd &&
-                      endRow > spanObj.rowSpanEnd))
+          ((startRow < spanObj.rowSpanStart! &&
+                      endRow! >= spanObj.rowSpanStart!) ||
+                  (startRow <= spanObj.rowSpanEnd! &&
+                      endRow! > spanObj.rowSpanEnd!))
               // inwards checking
               &&
-              ((startColumn >= spanObj.columnSpanStart &&
-                      startColumn <= spanObj.columnSpanEnd) ||
-                  (endColumn >= spanObj.columnSpanStart &&
-                      endColumn <= spanObj.columnSpanEnd)));
+              ((startColumn >= spanObj.columnSpanStart! &&
+                      startColumn <= spanObj.columnSpanEnd!) ||
+                  (endColumn! >= spanObj.columnSpanStart! &&
+                      endColumn <= spanObj.columnSpanEnd!)));
 
   if (changeValue) {
-    if (startColumn > spanObj.columnSpanStart) {
+    if (startColumn > spanObj.columnSpanStart!) {
       startColumn = spanObj.columnSpanStart;
     }
-    if (endColumn < spanObj.columnSpanEnd) {
+    if (endColumn! < spanObj.columnSpanEnd!) {
       endColumn = spanObj.columnSpanEnd;
     }
-    if (startRow > spanObj.rowSpanStart) {
-      startRow = spanObj.rowSpanStart;
+    if (startRow > spanObj.rowSpanStart!) {
+      startRow = spanObj.rowSpanStart!;
     }
-    if (endRow < spanObj.rowSpanEnd) {
+    if (endRow! < spanObj.rowSpanEnd!) {
       endRow = spanObj.rowSpanEnd;
     }
   }

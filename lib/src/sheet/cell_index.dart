@@ -2,7 +2,7 @@ part of excel;
 
 // ignore: must_be_immutable
 class CellIndex extends Equatable {
-  CellIndex._({int col, int row}) {
+  CellIndex._({int? col, int? row}) {
     assert(col != null && row != null);
     this._columnIndex = col;
     this._rowIndex = row;
@@ -13,7 +13,7 @@ class CellIndex extends Equatable {
   ///CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 0 ); // A1
   ///CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 1 ); // A2
   ///```
-  static CellIndex indexByColumnRow({int columnIndex, int rowIndex}) {
+  static CellIndex indexByColumnRow({int? columnIndex, int? rowIndex}) {
     assert(columnIndex != null && rowIndex != null);
     return CellIndex._(col: columnIndex, row: rowIndex);
   }
@@ -34,21 +34,21 @@ class CellIndex extends Equatable {
   /// var cellIndex = CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 0 );
   /// var cell = cellIndex.cellId; // A1
   String get cellId {
-    return getCellId(this.columnIndex, this.rowIndex);
+    return getCellId(this.columnIndex!, this.rowIndex!);
   }
 
-  int _rowIndex;
+  int? _rowIndex;
 
-  int get rowIndex {
+  int? get rowIndex {
     return this._rowIndex;
   }
 
-  int _columnIndex;
+  int? _columnIndex;
 
-  int get columnIndex {
+  int? get columnIndex {
     return this._columnIndex;
   }
 
   @override
-  List<Object> get props => [_rowIndex, _columnIndex];
+  List<Object?> get props => [_rowIndex, _columnIndex];
 }

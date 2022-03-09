@@ -3,36 +3,36 @@ part of excel;
 // For Spanning the columns and rows
 // ignore: must_be_immutable
 class _Span extends Equatable {
-  List<int> __start = <int>[];
+  List<int?> __start = <int>[];
 
-  List<int> __end = <int>[];
+  List<int?> __end = <int>[];
 
-  set _start(List<int> val) {
+  set _start(List<int?> val) {
     __start = val;
   }
 
-  set _end(List<int> val) {
+  set _end(List<int?> val) {
     __end = val;
   }
 
-  int get rowSpanStart {
+  int? get rowSpanStart {
     return __start[0];
   }
 
-  int get rowSpanEnd {
+  int? get rowSpanEnd {
     return __end[0];
   }
 
-  int get columnSpanStart {
+  int? get columnSpanStart {
     return __start[1];
   }
 
-  int get columnSpanEnd {
+  int? get columnSpanEnd {
     return __end[1];
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         __start[0],
         __start[1],
         __end[0],

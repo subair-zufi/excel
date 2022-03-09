@@ -4,23 +4,23 @@ part of excel;
 _selfCorrectSpanMap(Excel _excel) {
   _excel._mergeChangeLook.forEach((key) {
     if (_excel._sheetMap[key] != null &&
-        _excel._sheetMap[key]._spanList.isNotEmpty) {
-      List<_Span> spanList = List<_Span>.from(_excel._sheetMap[key]._spanList);
+        _excel._sheetMap[key]!._spanList.isNotEmpty) {
+      List<_Span?> spanList = List<_Span?>.from(_excel._sheetMap[key]!._spanList);
 
       for (int i = 0; i < spanList.length; i++) {
         if (spanList[i] != null) {
-          _Span checkerPos = spanList[i];
-          int startRow = checkerPos.rowSpanStart,
+          _Span checkerPos = spanList[i]!;
+          int? startRow = checkerPos.rowSpanStart,
               startColumn = checkerPos.columnSpanStart,
               endRow = checkerPos.rowSpanEnd,
               endColumn = checkerPos.columnSpanEnd;
 
           for (int j = i + 1; j < spanList.length; j++) {
             if (spanList[j] != null) {
-              _Span spanObj = spanList[j];
+              _Span spanObj = spanList[j]!;
 
               List locationChange = _isLocationChangeRequired(
-                  startColumn, startRow, endColumn, endRow, spanObj);
+                  startColumn, startRow!, endColumn, endRow, spanObj);
               List<int> gotPosition = locationChange[1];
 
               if (locationChange[0]) {
@@ -32,7 +32,7 @@ _selfCorrectSpanMap(Excel _excel) {
               } else {
                 List locationChange2 = _isLocationChangeRequired(
                     spanObj.columnSpanStart,
-                    spanObj.rowSpanStart,
+                    spanObj.rowSpanStart!,
                     spanObj.columnSpanEnd,
                     spanObj.rowSpanEnd,
                     checkerPos);
@@ -54,8 +54,8 @@ _selfCorrectSpanMap(Excel _excel) {
           spanList[i] = spanObj1;
         }
       }
-      _excel._sheetMap[key]._spanList = List<_Span>.from(spanList);
-      _excel._sheetMap[key]._cleanUpSpanMap();
+      _excel._sheetMap[key]!._spanList = List<_Span?>.from(spanList);
+      _excel._sheetMap[key]!._cleanUpSpanMap();
     }
   });
 }

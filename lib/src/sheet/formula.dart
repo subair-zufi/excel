@@ -1,7 +1,7 @@
 part of excel;
 
 class Formula {
-  String _formula;
+  String? _formula;
 
   Formula._(String formula) {
     this._formula = formula;

@@ -3,26 +3,26 @@ part of excel;
 /// Styling class for cells
 // ignore: must_be_immutable
 class CellStyle extends Equatable {
-  String _fontColorHex, _backgroundColorHex, _fontFamily;
-  HorizontalAlign _horizontalAlign;
-  VerticalAlign _verticalAlign;
-  TextWrapping _textWrapping;
-  bool _bold, _italic;
-  Underline _underline;
-  int _fontSize, _rotation;
+  String? _fontColorHex, _backgroundColorHex, _fontFamily;
+  HorizontalAlign? _horizontalAlign;
+  VerticalAlign? _verticalAlign;
+  TextWrapping? _textWrapping;
+  bool? _bold, _italic;
+  Underline? _underline;
+  int? _fontSize, _rotation;
 
   CellStyle({
-    String fontColorHex = "FF000000",
-    String backgroundColorHex = "none",
-    int fontSize,
-    String fontFamily,
+    String? fontColorHex = "FF000000",
+    String? backgroundColorHex = "none",
+    int? fontSize,
+    String? fontFamily,
     HorizontalAlign horizontalAlign = HorizontalAlign.Left,
     VerticalAlign verticalAlign = VerticalAlign.Bottom,
-    TextWrapping textWrapping,
-    bool bold = false,
+    TextWrapping? textWrapping,
+    bool? bold = false,
     Underline underline = Underline.None,
-    bool italic = false,
-    int rotation = 0,
+    bool? italic = false,
+    int? rotation = 0,
   }) {
     _textWrapping = textWrapping;
 
@@ -48,18 +48,18 @@ class CellStyle extends Equatable {
       _backgroundColorHex = "none";
     }
 
-    _verticalAlign = verticalAlign ?? VerticalAlign.Bottom;
+    _verticalAlign = verticalAlign;
 
-    _horizontalAlign = horizontalAlign ?? HorizontalAlign.Left;
+    _horizontalAlign = horizontalAlign;
   }
 
   ///Get Font Color
-  String get fontColor {
+  String? get fontColor {
     return _fontColorHex;
   }
 
   ///Set Font Color
-  set fontColor(String fontColorHex) {
+  set fontColor(String? fontColorHex) {
     if (fontColorHex != null) {
       _fontColorHex = _isColorAppropriate(fontColorHex);
     } else {
@@ -68,12 +68,12 @@ class CellStyle extends Equatable {
   }
 
   ///Get Background Color
-  String get backgroundColor {
+  String? get backgroundColor {
     return _backgroundColorHex;
   }
 
   ///Set Background Color
-  set backgroundColor(String backgroundColorHex) {
+  set backgroundColor(String? backgroundColorHex) {
     if (backgroundColorHex != null) {
       _backgroundColorHex = _isColorAppropriate(backgroundColorHex);
     } else {
@@ -82,58 +82,58 @@ class CellStyle extends Equatable {
   }
 
   ///Get Horizontal Alignment
-  HorizontalAlign get horizontalAlignment {
+  HorizontalAlign? get horizontalAlignment {
     return _horizontalAlign;
   }
 
   ///Set Horizontal Alignment
-  set horizontalAlignment(HorizontalAlign horizontalAlign) {
+  set horizontalAlignment(HorizontalAlign? horizontalAlign) {
     _horizontalAlign = horizontalAlign ?? HorizontalAlign.Left;
   }
 
   ///Get Vertical Alignment
-  VerticalAlign get verticalAlignment {
+  VerticalAlign? get verticalAlignment {
     return _verticalAlign;
   }
 
   ///Set Vertical Alignment
-  set verticalAlignment(VerticalAlign verticalAlign) {
+  set verticalAlignment(VerticalAlign? verticalAlign) {
     _verticalAlign = verticalAlign ?? VerticalAlign.Bottom;
   }
 
   ///`Get Wrapping`
-  TextWrapping get wrap {
+  TextWrapping? get wrap {
     return _textWrapping;
   }
 
   ///`Set Wrapping`
-  set wrap(TextWrapping textWrapping) {
+  set wrap(TextWrapping? textWrapping) {
     _textWrapping = textWrapping;
   }
 
   ///`Get FontFamily`
-  String get fontFamily {
+  String? get fontFamily {
     return _fontFamily;
   }
 
   ///`Set FontFamily`
-  set fontFamily(String family) {
+  set fontFamily(String? family) {
     _fontFamily = family;
   }
 
   ///Get Font Size
-  int get fontSize {
+  int? get fontSize {
     return _fontSize;
   }
 
   ///Set Font Size
-  set fontSize(int _font_Size) {
+  set fontSize(int? _font_Size) {
     _fontSize = _font_Size;
   }
 
   ///Get Rotation
   int get rotation {
-    return _rotation;
+    return _rotation!;
   }
 
   ///Rotation varies from [90 to -90]
@@ -151,37 +151,37 @@ class CellStyle extends Equatable {
   }
 
   ///Get `Underline`
-  Underline get underline {
+  Underline? get underline {
     return _underline;
   }
 
   ///Set `Underline`
-  set underline(Underline underline_) {
+  set underline(Underline? underline_) {
     _underline = underline_ ?? Underline.None;
   }
 
   ///Get `Bold`
-  bool get isBold {
+  bool? get isBold {
     return _bold;
   }
 
   ///Set `Bold`
-  set isBold(bool bold) {
+  set isBold(bool? bold) {
     _bold = bold ?? false;
   }
 
   ///Get `Italic`
-  bool get isItalic {
+  bool? get isItalic {
     return _italic;
   }
 
   ///Set `Italic`
-  set isItalic(bool italic) {
+  set isItalic(bool? italic) {
     _italic = italic ?? false;
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         _bold,
         _rotation,
         _italic,

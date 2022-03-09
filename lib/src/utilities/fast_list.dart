@@ -2,16 +2,16 @@ part of excel;
 
 // A helper class to optimized the usage of Maps
 class FastList<K> {
-  Map<K, int> _map;
-  int _index;
+  late Map<K, int?> _map;
+  late int _index;
 
   FastList() {
-    _map = <K, int>{};
+    _map = <K, int?>{};
     _index = 0;
   }
 
   FastList.from(FastList<K> other) {
-    _map = Map<K, int>.from(other._map);
+    _map = Map<K, int?>.from(other._map);
     _index = other._index;
   }
 
@@ -32,7 +32,7 @@ class FastList<K> {
 
   void clear() {
     _index = 0;
-    _map = <K, int>{};
+    _map = <K, int?>{};
   }
 
   List<K> get keys => _map.keys.toList();
